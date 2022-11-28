@@ -1,5 +1,5 @@
 <?php
-
+/*modelo para hacer pruebas de funciones para luego haccerlas controller contactos */
 class PruebaController extends Controller
 {
     

@@ -51,11 +51,53 @@ class AgendaModel
             die($ex->getMessage());
           }
     }
-
+/*funcion para realizar update en 2 tablas */
     public function actualizarDatos(array $post){
         var_dump($_POST);
-        return true;
+        try{
+            $this->db->beginTransaction();
+
+            $stmt = $this->db->prepare("UPDATE tb_datos_persona  
+                                                   SET NOMBRES = :nombres,
+                                                     APELLIDOS = :apellidos,
+                                                     DIRECCION = :direccion,
+                                                     CORREO = :email,
+                                                     FECHA_NAC = :fecha_nac
+                                                     WHERE ID_TELEFONO = :primaria");
+            
+            $stmt->bindParam(':primaria', $post['primaria']);
+            $stmt->bindParam(':nombres', $post['nombres']);
+            $stmt->bindParam(':apellidos', $post['apellidos']);
+            $stmt->bindParam(':direccion', $post['direccion']);
+            $stmt->bindParam(':email', $post['email']);
+            $stmt->bindParam(':fecha_nac', $post['fecha_nac']);
+            
+           $stmt->execute();
+
+
+           $stmt = $this->db->prepare("UPDATE tb_telefono  
+                                                  SET TELEFONO_ID = :id_telefono,
+                                                    TIPO_TELEFONO = :tipo,
+                                                    RFECHA = CURRENT_TIMESTAMP                                                
+                                                    WHERE ID_TELEFONO = :primaria");
+           
+           $stmt->bindParam(':primaria', $post['primaria']);
+           $stmt->bindParam(':id_telefono', $post['id_telefono']);
+           $stmt->bindParam(':tipo', $post['tipo']);
+          
+           $stmt->execute();
+
+
+           
+           $this->db->commit();
+
+           return true;
+        }catch(PDOException $ex) {
+            $this->db->rollback();
+            die($ex->getMessage());
+          }
     }
+    
 
 
     public function buscara(array $post)
@@ -91,5 +133,7 @@ class AgendaModel
 
 
 
+    /*update de datos por consulta*/ 
+ 
 
 }
