@@ -1,49 +1,64 @@
+<h2>Ingreso de datos</h2>
 
-   <h2>Ingreso de datos</h2>
-<form action="/my-handling-form-page" method="post">
- <ul>
- <li>
+<form action="<?= $config['url'] ?>?c=Contactos&m=request" method="post">
+  <?php $editar = $data['editar']??false; ?>  
+
+  <?php if($editar) : ?>
+    <input type="hidden" name='editar' value='1'> 
+    <input type="hidden" name='primaria' value="<?= $_POST['id_telefono']??'' ?>"> 
+  <?php endif ?>
+
+
+  <div>
     <label for="id_telefono">Telefono:</label>
-    <input type="text" id="id_telefono" name="id_telefono" required>
-  </li>
-  <li>
-    <label for="tipo">Tipo deTelefono:</label>
- 
-    <select name="tipo" id="tipo">
-  <option value="1">Personal</option>
-  <option value="2">Referencia Laborarl</option>
-  <option value="3">Referencia familiar</option>
-</select>
-  </li>
+    <input type="tel" id="id_telefono" name="id_telefono" value='<?= $_POST['id_telefono']??'' ?>'>
+     <p><?= ($data['msg']['msg-telefono']??'') ?></p>
+  </div>
+
+ <div>
+  <?php $tipoPost = $_POST['tipo']??0; ?>
   
-  <li>
+    <label for="tipo">Tipo deTelefono:</label>    
+    <select name="tipo" id="tipo">
+      <?php foreach($data['tipos'] as $tipo) : ?>
+        <option value="<?= $tipo['ID'] ?>"<?= ( $tipo['ID'] == $tipoPost) ? 'selected' : '' ?> ><?= $tipo['DESCRIPCION'] ?></option>
+      <?php endforeach ?>
+    </select>
+ </div>
+
+ <div>
     <label for="nombres">Nombres:</label>
-    <input type="text" id="nombres" name="nombres" required>
-  </li>
-  <li>
+    <input type="text" id="nombres" name="nombres" value="<?= $_POST['nombres']??'' ?>">
+ </div>
+
+ <div>
     <label for="apellidos">Apellidos:</label>
-    <input type="text" id="apellidos" name="apellidos" required>
-  </li>
-  <li>
+    <input type="text" id="apellidos" name="apellidos" value="<?= $_POST['apellidos']??'' ?>">
+ </div>
+
+ <div>
   <label for="fecha">Fecha de Nacimiento:</label>
+  <input type="date" id="fecha_nac" name="fecha_nac" value="<?= $_POST['fecha_nac']??'' ?>" min="1900-01-01" max="2200-12-31" >
+ </div>
 
-<input type="date" id="fecha_nac" name="fecha_nac"
-       value="1900"
-       min="1900-01-01" max="2200-12-31">
-  </li>
-  <li>
-  <label for="email">Correo electrónico:</label>
+ <div>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" value="<?= $_POST['correo']??'' ?>">
+ </div>
 
-   <input type="email" id="email" required>
-  </li>
-  <li>
+ <div>
     <label for="msg">Direccion:</label>
-    <textarea id="msg" name="user_message" required></textarea>
-  </li>
-  <li class="button">
-  <button type="submit">Guardar</button>
-</li>
+    <textarea id="direccion" name="direccion" ></textarea>
+    
+ </div>
+
+ <p><?= ($data['msg']['msg-request']??'') ?></p>
 
 
- </ul>
+ <div class="button">
+  <input type="hidden" value="1" name="submit">
+  <button type="submit"><?= ($editar) ? 'Editar' : 'Guardar' ?> </button>
+ </div>
+ 
+ 
 </form>

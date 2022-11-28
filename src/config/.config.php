@@ -6,4 +6,5 @@ return [
     'pass' => 'coka2022',
     'base' => 'bd_agenda',
     'app'  => 'C:/xampp/htdocs/agenda/',
+    'url'  => 'http://localhost/agenda/',
 ];

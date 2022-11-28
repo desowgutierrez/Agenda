@@ -1,14 +1,9 @@
 
 <h2>Seleccion de Agenda</h2>
-<form action="/my-handling-form-page" method="post">
- <ul>
- </li>
-  <li class="button">
-  <button type="submit">Ingreso de Datos</button>
-</li>
-</li>
-  <li class="button">
-  <button type="submit">Realizar Busqueda</button>
-</li>
-
-</ul>
+<!-- opciones de selec -->
+<div class="button">
+  <a href="<?= $config['url'] ?>?c=contactos&m=ingreso">Ingreso de Datos</a>
+</div>
+<div class="button">
+  <a href="<?= $config['url'] ?>?c=contactos&m=busqueda">Realizar Busqueda</a>
+</div>
