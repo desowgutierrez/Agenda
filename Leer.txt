@@ -1,0 +1,7 @@
+Proyecto agenda
+
+se realizo un archivo de configuracion para que se pueda editar y cambiar la localizacion de la carpeta que se esta ejecutando. el archivo se encuentra en carpeta src/config/
+
+
+la carpeta principal es llamada agenda.
+en esta carpeta se agrego archivo de la configuracio de base de datos la cual se llama db_agenda, asi tambien se llama la base de datos que se creo para este proyecto.
