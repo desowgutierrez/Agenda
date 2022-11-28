@@ -1,0 +1,5 @@
+#reescribir reglas de apache config, para redireccionar todas las peticionea al index
+RewriteEngine on  
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /agenda/index.php?path=$1 [NC,L,QSA]
